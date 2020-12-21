@@ -1,7 +1,7 @@
-import { withFormik } from 'formik';
+import { FormikValues, withFormik } from 'formik';
 import { connect } from 'react-redux';
 import { login } from '../../../slices/authSlice';
-import LoginForm from './LoginForm';
+import { LoginForm } from './LoginForm';
 import * as Yup from 'yup';
 
 //constants
@@ -10,7 +10,9 @@ import {
   PASSWORD_SHORT_ERROR,
 } from '../../../constants/messages/formMessages';
 
-const EnhancedLoginForm = withFormik({
+interface EnhancedLoginFormProps {}
+
+const EnhancedLoginForm = withFormik<EnhancedLoginFormProps, FormikValues>({
   mapPropsToValues: () => ({
     email: '',
     password: '',
@@ -23,7 +25,7 @@ const EnhancedLoginForm = withFormik({
       .min(6, PASSWORD_SHORT_ERROR),
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
-    const { login } = props;
+    // const { login } = props;
 
     const formData = {
       email: values.email,
