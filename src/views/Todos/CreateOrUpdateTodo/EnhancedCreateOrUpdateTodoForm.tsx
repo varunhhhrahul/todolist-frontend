@@ -1,4 +1,4 @@
-import { withFormik } from 'formik';
+import { FormikValues, withFormik } from 'formik';
 import { connect, RootStateOrAny } from 'react-redux';
 import { createTodo, updateTodo } from '../../../slices/todoSlice';
 import { CreateOrUpdateTodoForm } from './CreateOrUpdateTodoForm';
@@ -10,7 +10,22 @@ import {
   PASSWORD_SHORT_ERROR,
 } from '../../../constants/messages/formMessages';
 
-const EnhancedCreateOrUpdateTodoForm = withFormik({
+interface EnhancedCreateOrUpdateTodoFormProps {
+  todo?: {
+    task?: string;
+    description?: string;
+    isEvent?: boolean;
+    isCompleted?: boolean;
+    isImportant?: boolean;
+    dateOfCompletion?: Date;
+    dateOfEvent?: Date;
+  };
+}
+
+const EnhancedCreateOrUpdateTodoForm = withFormik<
+  EnhancedCreateOrUpdateTodoFormProps,
+  FormikValues
+>({
   mapPropsToValues: (props) => ({
     task: props.todo ? props.todo.task : '',
     description: props.todo ? props.todo.description : '',
@@ -33,7 +48,7 @@ const EnhancedCreateOrUpdateTodoForm = withFormik({
     dateOfCompletion: Yup.date().notRequired(),
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
-    const { todo, createTodo, updateTodo } = props;
+    // const { todo, createTodo, updateTodo } = props;
 
     // if (todo) {
     //   updateTodo(values);
@@ -53,6 +68,6 @@ const mapStateToProps = (state: RootStateOrAny) => ({
   todo: state.todo,
 });
 
-export default connect(null, { createTodo, updateTodo })(
+export default connect(mapStateToProps, { createTodo, updateTodo })(
   EnhancedCreateOrUpdateTodoForm
 );
