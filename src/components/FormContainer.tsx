@@ -6,9 +6,13 @@ const useStyles = makeStyles(formContainerStyles);
 
 interface FormContainerProps {
   children: ReactChild;
+  color?: string;
 }
 
-export const FormContainer: React.FC<FormContainerProps> = ({ children }) => {
+export const FormContainer: React.FC<FormContainerProps> = ({
+  children,
+  color,
+}) => {
   const classes = useStyles();
 
   return (
@@ -18,7 +22,11 @@ export const FormContainer: React.FC<FormContainerProps> = ({ children }) => {
           <Grid item md={6} className={classes.grid}>
             <Fragment>
               <Container maxWidth='sm'>
-                <Paper className={classes.paper} elevation={3}>
+                <Paper
+                  style={{ backgroundColor: color ? color : 'white' }}
+                  className={classes.paper}
+                  elevation={3}
+                >
                   {children}
                 </Paper>
               </Container>
