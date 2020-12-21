@@ -14,7 +14,7 @@ const formContainerStyles = (theme: any) => ({
   paper: {
     marginTop: theme.spacing(0),
     padding: '15px',
-    borderRadius: '15px',
+    borderRadius: '5px',
   },
 });
 export default formContainerStyles;
