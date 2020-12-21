@@ -1,7 +1,7 @@
-import { withFormik } from 'formik';
+import { FormikValues, withFormik } from 'formik';
 import { connect } from 'react-redux';
 import { register } from '../../../slices/authSlice';
-import { RegistrationForm } from './RegisterForm';
+import { RegisterForm } from './RegisterForm';
 import * as Yup from 'yup';
 
 //constants
@@ -16,7 +16,12 @@ import {
   PASSWORDS_MATCH_ERROR,
 } from '../../../constants/messages/formMessages';
 
-const EnhancedRegistrationForm = withFormik({
+interface EnhancedRegisterFormProps {}
+
+const EnhancedRegistrationForm = withFormik<
+  EnhancedRegisterFormProps,
+  FormikValues
+>({
   mapPropsToValues: () => ({
     name: '',
     username: '',
@@ -50,14 +55,12 @@ const EnhancedRegistrationForm = withFormik({
     // publicKey: Yup.string().required(PUBLIC_KEY_REQUIRED),
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
-    const { register, history } = props;
-
     // register(values);
     // console.log(values);
 
     setSubmitting(false);
   },
-  displayName: 'RegistrationForm',
-})(RegistrationForm);
+  displayName: 'RegisterForm',
+})(RegisterForm);
 
 export default connect(null, { register })(EnhancedRegistrationForm);
