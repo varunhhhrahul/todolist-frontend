@@ -14,16 +14,18 @@ import MyAlert from './components/Alert';
 import { LOGIN, REGISTER } from './constants/routes';
 import { Login } from './views/auth/Login/Login';
 import { Register } from './views/auth/Register/Register';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 
 const App = () => {
-  useEffect(() => {
-    (async () => {
-      if (localStorage.token) {
-        await setAuthToken(localStorage.token);
-        store.dispatch(loadUser());
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     if (localStorage.token) {
+  //       await setAuthToken(localStorage.token);
+  //       store.dispatch(loadUser());
+  //     }
+  //   })();
+  // }, []);
 
   return (
     <Provider store={store}>
