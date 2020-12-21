@@ -1,5 +1,5 @@
 import setAuthToken from '../utils/setAuthToken';
-import { createSlice } from '@reduxjs/toolkit';
+import { AnyAction, createSlice, ThunkDispatch } from '@reduxjs/toolkit';
 import { setAlert } from './alertSlice';
 import * as REQUESTS from '../api/authRequests';
 // import { LOGIN } from '../constants/routes';
@@ -68,7 +68,9 @@ export default authSlice.reducer;
 // thunks
 
 //load user
-export const loadUser = () => async (dispatch: any) => {
+export const loadUser = () => async (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) => {
   try {
     const data = await REQUESTS.getMe();
     const { success } = data;
