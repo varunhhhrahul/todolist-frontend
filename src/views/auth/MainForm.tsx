@@ -55,15 +55,15 @@ const MainForm = () => {
 
   return (
     <FormContainer color='#24323B'>
-      <AppBar position='sticky'>
+      <AppBar position='sticky' elevation={0}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label='simple tabs example'
           style={{ justifyContent: 'space-between' }}
         >
-          <Tab style={{ margin: 12 }} label='Sign Up' {...a11yProps(0)} />
-          <Tab style={{ margin: 12 }} label='Login' {...a11yProps(1)} />
+          <Tab style={{ margin: 15 }} label='Sign Up' {...a11yProps(0)} />
+          <Tab style={{ margin: 15 }} label='Login' {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
