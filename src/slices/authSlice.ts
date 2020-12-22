@@ -82,9 +82,7 @@ export const loadUser = (): AppThunk => async (dispatch) => {
 };
 
 //register user
-export const register = (formData: any, history: any): AppThunk => async (
-  dispatch: any
-) => {
+export const register = (formData: any): AppThunk => async (dispatch: any) => {
   try {
     dispatch(authStart());
     const data = await REQUESTS.register(formData);
