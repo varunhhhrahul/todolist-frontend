@@ -1,3 +1,4 @@
+import { AppThunk } from './../store';
 import setAuthToken from '../utils/setAuthToken';
 import { AnyAction, createSlice, ThunkDispatch } from '@reduxjs/toolkit';
 import { setAlert } from './alertSlice';
@@ -68,9 +69,7 @@ export default authSlice.reducer;
 // thunks
 
 //load user
-export const loadUser = () => async (
-  dispatch: ThunkDispatch<{}, {}, AnyAction>
-) => {
+export const loadUser = (): AppThunk => async (dispatch) => {
   try {
     const data = await REQUESTS.getMe();
     const { success } = data;
@@ -83,7 +82,7 @@ export const loadUser = () => async (
 };
 
 //register user
-export const register = (formData: any, history: any) => async (
+export const register = (formData: any, history: any): AppThunk => async (
   dispatch: any
 ) => {
   try {
@@ -102,7 +101,7 @@ export const register = (formData: any, history: any) => async (
 };
 
 //login
-export const login = (formData: any) => async (dispatch: any) => {
+export const login = (formData: any): AppThunk => async (dispatch: any) => {
   try {
     dispatch(authStart());
     const data = await REQUESTS.login(formData);
@@ -124,7 +123,9 @@ export const login = (formData: any) => async (dispatch: any) => {
 };
 
 // update user details
-export const updateDetails = (formData: any) => async (dispatch: any) => {
+export const updateDetails = (formData: any): AppThunk => async (
+  dispatch: any
+) => {
   try {
     dispatch(setLoading());
 
@@ -142,7 +143,9 @@ export const updateDetails = (formData: any) => async (dispatch: any) => {
 };
 
 // update user password
-export const updatePassword = (formData: any) => async (dispatch: any) => {
+export const updatePassword = (formData: any): AppThunk => async (
+  dispatch: any
+) => {
   try {
     dispatch(setLoading());
     const data = await REQUESTS.updatePassword(formData);
@@ -159,14 +162,14 @@ export const updatePassword = (formData: any) => async (dispatch: any) => {
 };
 
 //logout
-export const logout = () => async (dispatch: any) => {
+export const logout = (): AppThunk => async (dispatch: any) => {
   dispatch(setLogout());
   dispatch(setAlert('Logged out successfully', 'success'));
   await REQUESTS.logout();
 };
 
 // send email for reset password
-export const sendEmail = (email: string) => async (dispatch: any) => {
+export const sendEmail = (email: string): AppThunk => async (dispatch: any) => {
   try {
     dispatch(setLoading());
     const data = await REQUESTS.forgotPassword(email);
@@ -182,9 +185,10 @@ export const sendEmail = (email: string) => async (dispatch: any) => {
 };
 
 // reset password
-export const resetPassword = (token: string, password: string) => async (
-  dispatch: any
-) => {
+export const resetPassword = (
+  token: string,
+  password: string
+): AppThunk => async (dispatch: any) => {
   try {
     dispatch(setLoading());
     const data = await REQUESTS.resetPassword(token, password);
