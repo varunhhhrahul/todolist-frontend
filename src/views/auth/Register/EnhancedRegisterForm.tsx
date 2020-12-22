@@ -15,8 +15,13 @@ import {
   NAME_REQUIRED,
   PASSWORDS_MATCH_ERROR,
 } from '../../../constants/messages/formMessages';
-
-interface EnhancedRegisterFormProps {}
+import { AppThunk } from '../../../store';
+interface IDispatchProps {
+  register: (formData: any) => AppThunk;
+}
+interface EnhancedRegisterFormProps {
+  register: (formData: any) => void;
+}
 export interface EnhancedRegisterFormValues {
   firstName: string;
   lastName: string;
@@ -55,12 +60,18 @@ const EnhancedRegistrationForm = withFormik<
       .oneOf([Yup.ref('password')], PASSWORDS_MATCH_ERROR),
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
-    // register(values);
-    console.log(values);
+    const { register } = props;
+    register({
+      name: values.firstName + ' ' + values.lastName,
+      ...values,
+    });
+    // console.log(values);
 
     setSubmitting(false);
   },
   displayName: 'RegisterForm',
 })(RegisterForm);
 
-export default connect(null, { register })(EnhancedRegistrationForm);
+export default connect<null, IDispatchProps>(null, { register })(
+  EnhancedRegistrationForm
+);
