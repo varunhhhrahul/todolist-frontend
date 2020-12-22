@@ -11,12 +11,12 @@ import { loadUser } from './slices/authSlice';
 import setAuthToken from './utils/setAuthToken';
 import { Alert } from '@material-ui/lab';
 import MyAlert from './components/Alert';
-import { LOGIN, REGISTER } from './constants/routes';
+import { HOME, REGISTER } from './constants/routes';
 import { Login } from './views/auth/Login/Login';
 import { Register } from './views/auth/Register/Register';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import MainForm from './views/auth/ManiForm';
+import MainForm from './views/auth/MainForm';
 
 const App = () => {
   // useEffect(() => {
@@ -35,11 +35,8 @@ const App = () => {
           <MyAlert />
           {/* Add Suspense */}
           <Switch>
-            <Route exact path={LOGIN}>
+            <Route exact path={HOME}>
               <MainForm />
-            </Route>
-            <Route exact path={REGISTER}>
-              <Register />
             </Route>
           </Switch>
         </Router>
