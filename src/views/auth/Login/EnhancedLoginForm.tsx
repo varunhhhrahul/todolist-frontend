@@ -9,10 +9,23 @@ import {
   PASSWORD_REQUIRED,
   PASSWORD_SHORT_ERROR,
 } from '../../../constants/messages/formMessages';
+import { AppThunk } from '../../../store';
 
-interface EnhancedLoginFormProps {}
+interface IDispatchProps {
+  login: (formData: any) => AppThunk;
+}
+interface EnhancedLoginFormProps {
+  login: (formDate: any) => void;
+}
+export interface EnhancedLoginFormValues {
+  email: string;
+  password: string;
+}
 
-const EnhancedLoginForm = withFormik<EnhancedLoginFormProps, FormikValues>({
+const EnhancedLoginForm = withFormik<
+  EnhancedLoginFormProps,
+  EnhancedLoginFormValues
+>({
   mapPropsToValues: () => ({
     email: '',
     password: '',
@@ -25,14 +38,9 @@ const EnhancedLoginForm = withFormik<EnhancedLoginFormProps, FormikValues>({
       .min(6, PASSWORD_SHORT_ERROR),
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
-    // const { login } = props;
+    const { login } = props;
 
-    const formData = {
-      email: values.email,
-      password: values.password,
-    };
-
-    // login(formData);
+    login(values);
 
     console.log(values);
     setSubmitting(false);
@@ -40,4 +48,6 @@ const EnhancedLoginForm = withFormik<EnhancedLoginFormProps, FormikValues>({
   displayName: 'LoginForm',
 })(LoginForm);
 
-export default connect(null, { login })(EnhancedLoginForm);
+export default connect<null, IDispatchProps>(null, { login })(
+  EnhancedLoginForm
+);
