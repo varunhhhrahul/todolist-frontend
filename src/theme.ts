@@ -11,9 +11,6 @@ export const MuiTheme = createMuiTheme({
   },
   typography: {
     fontFamily: [
-      'Poppins',
-      'Chewy',
-      'cursive',
       'sans-serif',
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
