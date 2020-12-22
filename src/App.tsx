@@ -16,6 +16,7 @@ import { Login } from './views/auth/Login/Login';
 import { Register } from './views/auth/Register/Register';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import MainForm from './views/auth/ManiForm';
 
 const App = () => {
   // useEffect(() => {
@@ -35,7 +36,7 @@ const App = () => {
           {/* Add Suspense */}
           <Switch>
             <Route exact path={LOGIN}>
-              <Login />
+              <MainForm />
             </Route>
             <Route exact path={REGISTER}>
               <Register />
