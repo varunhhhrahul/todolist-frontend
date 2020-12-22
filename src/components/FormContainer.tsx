@@ -5,7 +5,7 @@ import formContainerStyles from '../assets/jss/FormContainer';
 const useStyles = makeStyles(formContainerStyles);
 
 interface FormContainerProps {
-  children: ReactChild;
+  children: React.ReactNode;
   color?: string;
 }
 
