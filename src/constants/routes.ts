@@ -1,5 +1,5 @@
 export const AUTH = '/auth';
-export const LOGIN = `/`;
+export const HOME = `/`;
 export const REGISTER = `${AUTH}/register`;
 export const DASHBOARD = '/dashboard/todos';
 export const SINGLE_TODO = `${DASHBOARD}/:id`;
