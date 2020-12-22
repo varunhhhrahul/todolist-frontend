@@ -31,10 +31,15 @@ const TabPanel = (props: TabPanelProps) => {
   );
 };
 
-const a11yProps = (index: any) => {
+const a11yProps = (index: any, width: number) => {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
+    style: {
+      backgroundColor: '#4EB189',
+      // margin: 15,
+      width: width,
+    },
   };
 };
 
@@ -49,6 +54,14 @@ const MainForm = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  React.useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
@@ -62,8 +75,14 @@ const MainForm = () => {
           aria-label='simple tabs example'
           style={{ justifyContent: 'space-between' }}
         >
-          <Tab style={{ margin: 15 }} label='Sign Up' {...a11yProps(0)} />
-          <Tab style={{ margin: 15 }} label='Login' {...a11yProps(1)} />
+          <Tab
+            label='Sign Up'
+            {...a11yProps(0, width > 600 ? 220 : width / 2.5)}
+          />
+          <Tab
+            label='Login'
+            {...a11yProps(1, width > 600 ? 220 : width / 2.5)}
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
