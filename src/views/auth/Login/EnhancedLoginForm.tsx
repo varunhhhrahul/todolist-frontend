@@ -31,7 +31,7 @@ const EnhancedLoginForm = withFormik<
     password: '',
   }),
   validationSchema: Yup.object().shape({
-    text: Yup.string().required('Email or username required!'),
+    email: Yup.string().required('Email is required!'),
 
     password: Yup.string()
       .required(PASSWORD_REQUIRED)
@@ -42,7 +42,7 @@ const EnhancedLoginForm = withFormik<
 
     login(values);
 
-    console.log(values);
+    // console.log(values);
     setSubmitting(false);
   },
   displayName: 'LoginForm',
