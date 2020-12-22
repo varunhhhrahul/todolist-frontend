@@ -16,7 +16,7 @@ export const FormContainer: React.FC<FormContainerProps> = ({
   const classes = useStyles();
 
   return (
-    <div>
+    <div style={{ marginTop: 80 }}>
       <Container>
         <Grid container direction='row' justify='center' alignItems='center'>
           <Grid item md={6} className={classes.grid}>
