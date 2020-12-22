@@ -17,46 +17,46 @@ import {
 } from '../../../constants/messages/formMessages';
 
 interface EnhancedRegisterFormProps {}
+export interface EnhancedRegisterFormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const EnhancedRegistrationForm = withFormik<
   EnhancedRegisterFormProps,
-  FormikValues
+  EnhancedRegisterFormValues
 >({
   mapPropsToValues: () => ({
-    name: '',
-    username: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
-    // role: 'user',
-    address: '',
-    image: '',
   }),
   validationSchema: Yup.object().shape({
-    name: Yup.string().required(NAME_REQUIRED),
+    firstName: Yup.string().required('First name is required!'),
+    lastName: Yup.string().required('Last name is required!'),
     email: Yup.string()
       .min(3, EMAIL_NOT_LONG_ERROR)
       .max(255)
       .email(EMAIL_INVALID_ERROR)
       .required(EMAIL_REQUIRED),
-    username: Yup.string().required(),
+
     password: Yup.string()
       .required(PASSWORD_REQUIRED)
       .min(6, PASSWORD_SHORT_ERROR),
-    address: Yup.string()
-      .required('Address is required!')
-      .min(10, 'Address is too short'),
+
     confirmPassword: Yup.string()
       .required(CONFIRM_PASSWORD_REQUIRED)
       .min(6, PASSWORD_SHORT_ERROR)
       .oneOf([Yup.ref('password')], PASSWORDS_MATCH_ERROR),
-    image: Yup.string().notRequired(),
-    // role: Yup.string().required(ROLE_REQUIRED),
-    // publicKey: Yup.string().required(PUBLIC_KEY_REQUIRED),
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
     // register(values);
-    // console.log(values);
+    console.log(values);
 
     setSubmitting(false);
   },
