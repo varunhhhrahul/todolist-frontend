@@ -7,6 +7,7 @@ import {
   makeStyles,
   TextField,
   InputAdornment,
+  Button,
 } from '@material-ui/core';
 import {
   Visibility as VisibilityIcon,
@@ -208,6 +209,15 @@ export const RegisterForm: React.FC<
             }}
           />
         </FormControl>
+        <Button
+          fullWidth
+          style={{ color: 'white', fontSize: 20 }}
+          type='submit'
+          color='secondary'
+          variant='contained'
+        >
+          Get Started
+        </Button>
       </form>
     </>
   );
