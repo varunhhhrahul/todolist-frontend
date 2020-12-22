@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const MainForm = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
   const [width, setWidth] = React.useState(window.innerWidth);
 
