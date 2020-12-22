@@ -1,7 +1,8 @@
-import thunk from 'redux-thunk';
+import thunk, { ThunkAction } from 'redux-thunk';
 import rootReducer from './slices/index';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Action } from '@reduxjs/toolkit';
 import setAuthToken from './utils/setAuthToken';
+import { RootState } from './slices/index';
 
 const store = configureStore({
   reducer: rootReducer,
@@ -13,6 +14,10 @@ const store = configureStore({
 
 // initialize current state from redux store for subscription comparison
 // preventing undefined error
+export type AppDispatch = typeof store.dispatch;
+
+export type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
+
 let currentState = store.getState();
 
 store.subscribe(async () => {
