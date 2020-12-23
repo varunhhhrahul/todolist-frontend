@@ -11,12 +11,14 @@ import { loadUser } from './slices/authSlice';
 import setAuthToken from './utils/setAuthToken';
 import { Alert } from '@material-ui/lab';
 import MyAlert from './components/Alert';
-import { HOME, REGISTER } from './constants/routes';
+import { DASHBOARD, HOME, REGISTER } from './constants/routes';
 import { Login } from './views/auth/Login/Login';
 import { Register } from './views/auth/Register/Register';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import MainForm from './views/auth/MainForm';
+import PrivateRoute from './components/PrivateRoute';
+import { Todos } from './views/Todos/Todos';
 
 const App = () => {
   // useEffect(() => {
@@ -38,6 +40,10 @@ const App = () => {
             <Route exact path={HOME}>
               <MainForm />
             </Route>
+
+            <PrivateRoute exact path={DASHBOARD}>
+              <Todos />
+            </PrivateRoute>
           </Switch>
         </Router>
       </ThemeProvider>
