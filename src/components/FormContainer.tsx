@@ -7,16 +7,18 @@ const useStyles = makeStyles(formContainerStyles);
 interface FormContainerProps {
   children: React.ReactNode;
   color?: string;
+  marginTop?: number;
 }
 
 export const FormContainer: React.FC<FormContainerProps> = ({
   children,
   color,
+  marginTop,
 }) => {
   const classes = useStyles();
 
   return (
-    <div style={{ marginTop: 80 }}>
+    <div style={{ marginTop: marginTop }}>
       <Container>
         <Grid container direction='row' justify='center' alignItems='center'>
           <Grid item md={6} className={classes.grid}>
@@ -36,4 +38,8 @@ export const FormContainer: React.FC<FormContainerProps> = ({
       </Container>
     </div>
   );
+};
+
+FormContainer.defaultProps = {
+  marginTop: 80,
 };
