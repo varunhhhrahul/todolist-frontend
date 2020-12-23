@@ -26,7 +26,8 @@ export interface EnhancedCreateOrUpdateTodoFormValues {
 }
 
 interface EnhancedCreateOrUpdateTodoFormProps {
-  todo?: {
+  todo: {
+    _id: string;
     task?: string | undefined;
     description?: string | undefined;
     isEvent?: boolean | undefined;
@@ -36,7 +37,7 @@ interface EnhancedCreateOrUpdateTodoFormProps {
     dateOfEvent?: Date | null | undefined;
   };
   createTodo?: (formData: any) => void;
-  updateTodo?: (id: string, formData: any, history: any) => void;
+  updateTodo: (id: string, formData: any, history: any) => void;
   history?: any;
 }
 
@@ -66,18 +67,18 @@ const EnhancedCreateOrUpdateTodoForm = withFormik<
     dateOfCompletion: Yup.date().notRequired(),
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
-    const { todo, createTodo, updateTodo } = props;
+    const { todo, createTodo, updateTodo, history } = props;
 
-    // if (todo) {
-    //   updateTodo(values);
-    // } else {
+    updateTodo(todo._id, values, history);
+    history.goBack();
+
     //   createTodo(values);
     // }
 
     // login(formData);
 
-    console.log(values);
-    setSubmitting(false);
+    // console.log({ id: todo?._id, ...values });
+    // setSubmitting(false);
   },
   displayName: 'CreateOrUpdateTodoForm',
 })(CreateOrUpdateTodoForm);
