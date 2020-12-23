@@ -46,7 +46,7 @@ export const Todos: React.FC<TodosProps> = ({}) => {
         <EnhancedBasicCreateTodoForm />
       </FormContainer>
       <FormContainer marginTop={-65} color='#F4F4F4'>
-        <List style={{ height: 300, overflow: 'sc' }}>
+        <List style={{ height: 300, overflow: 'scroll' }}>
           {todos.map((todo: any) => {
             return (
               <Paper
