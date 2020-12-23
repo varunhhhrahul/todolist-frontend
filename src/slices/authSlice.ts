@@ -117,6 +117,7 @@ export const login = (formData: any): AppThunk => async (dispatch: any) => {
       dispatch(authComplete());
     }
   } catch (err) {
+    // console.error(err);
     dispatch(setAlert(err.response.data.error, 'error'));
     dispatch(authFailure(err.response.data.error));
   }
