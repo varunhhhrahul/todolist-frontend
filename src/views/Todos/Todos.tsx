@@ -42,11 +42,11 @@ export const Todos: React.FC<TodosProps> = ({}) => {
   if (todos === null) return <Loader />;
   return (
     <>
-      <FormContainer>
+      <FormContainer marginTop={20}>
         <EnhancedBasicCreateTodoForm />
       </FormContainer>
       <FormContainer marginTop={-65} color='#F4F4F4'>
-        <List>
+        <List style={{ height: 300, overflow: 'sc' }}>
           {todos.map((todo: any) => {
             return (
               <Paper
