@@ -8,7 +8,7 @@ import {
 import { useHistory, useParams } from 'react-router-dom';
 import { FormContainer } from '../../../components/FormContainer';
 import Loader from '../../../components/Loader/Loader';
-import { getTodo } from '../../../slices/todoSlice';
+import { getTodo, setTodo } from '../../../slices/todoSlice';
 import { Button } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import EnhancedCreateOrUpdateTodoForm from './EnhancedCreateOrUpdateTodoForm';
@@ -21,6 +21,7 @@ export const CreateOrUpdateTodo: React.FC<CreateOrUpdateTodoProps> = ({}) => {
   const { id } = params;
   const history = useHistory();
   useEffect(() => {
+    dispatch(setTodo(null));
     dispatch(getTodo(id));
   }, []);
 
@@ -32,8 +33,9 @@ export const CreateOrUpdateTodo: React.FC<CreateOrUpdateTodoProps> = ({}) => {
     };
   }, shallowEqual);
   useEffect(() => {
+    dispatch(setTodo(null));
     dispatch(getTodo(id));
-  }, [id, dispatch, todo]);
+  }, [id]);
   if (todo === null || loading) return <Loader />;
   return (
     <>
