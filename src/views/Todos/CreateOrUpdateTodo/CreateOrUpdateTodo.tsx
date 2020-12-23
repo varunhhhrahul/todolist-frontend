@@ -26,7 +26,7 @@ export const CreateOrUpdateTodo: React.FC<CreateOrUpdateTodoProps> = ({}) => {
   }, []);
 
   const {
-    todo: { todo, loading },
+    todo: { todo, loading, createTodo, updatedTodo, deletedTodo },
   } = useSelector((state: RootStateOrAny) => {
     return {
       todo: state.todo,
@@ -35,7 +35,7 @@ export const CreateOrUpdateTodo: React.FC<CreateOrUpdateTodoProps> = ({}) => {
   useEffect(() => {
     dispatch(setTodo(null));
     dispatch(getTodo(id));
-  }, [id]);
+  }, [id, createTodo, updatedTodo, deletedTodo]);
   if (todo === null || loading) return <Loader />;
   return (
     <>
