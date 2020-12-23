@@ -23,7 +23,7 @@ const authSlice = createSlice({
     },
     setCurrentUser(state, action) {
       state.isAuthenticated = true;
-      state.user = action.payload.data;
+      state.user = action.payload;
       state.loading = false;
     },
     setToken(state, action) {
@@ -71,13 +71,15 @@ export default authSlice.reducer;
 //load user
 export const loadUser = (): AppThunk => async (dispatch) => {
   try {
-    const data = await REQUESTS.getMe();
-    const { success } = data;
+    const resData = await REQUESTS.getMe();
+    const { success, data } = resData;
+    // console.log(resData);
     if (success) {
       dispatch(setCurrentUser(data));
     }
   } catch (err) {
-    dispatch(authFailure(err.response.data.error));
+    console.error(err);
+    // dispatch(authFailure(err.response.data.error));
   }
 };
 
