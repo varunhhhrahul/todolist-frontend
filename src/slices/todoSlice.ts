@@ -52,20 +52,25 @@ export const {
   setUpdatedTodo,
 } = todoSlice.actions;
 
+export default todoSlice.reducer;
+
 export const getAllTodos = () => async (dispatch: any) => {
   try {
+    dispatch(setLoading());
     const resData = await REQUESTS.getTodos();
     const { success, data } = resData;
     if (success) {
       dispatch(setTodos(data));
     }
   } catch (err) {
+    dispatch(setLoading());
     dispatch(setAlert(err.response.data.err, 'error'));
   }
 };
 
 export const getTodo = (id: string) => async (dispatch: any) => {
   try {
+    dispatch(setLoading());
     const resData = await REQUESTS.getTodo(id);
 
     const { success, data } = resData;
@@ -73,14 +78,14 @@ export const getTodo = (id: string) => async (dispatch: any) => {
       dispatch(setTodo(data));
     }
   } catch (err) {
+    dispatch(setLoading());
     dispatch(setAlert(err.response.data.err, 'error'));
   }
 };
 
-export const createTodo = (formData: any, history: History) => async (
-  dispatch: any
-) => {
+export const createTodo = (formData: any) => async (dispatch: any) => {
   try {
+    dispatch(setLoading());
     const resData = await REQUESTS.createTodo(formData);
 
     const { success, data } = resData;
@@ -90,16 +95,16 @@ export const createTodo = (formData: any, history: History) => async (
       // history.push(DASHBOARD);
     }
   } catch (err) {
+    dispatch(setLoading());
     dispatch(setAlert(err.response.data.err, 'error'));
   }
 };
 
-export const updateTodo = (
-  id: string,
-  formData: any,
-  history: History
-) => async (dispatch: any) => {
+export const updateTodo = (id: string, formData: any, history: any) => async (
+  dispatch: any
+) => {
   try {
+    dispatch(setLoading());
     const resData = await REQUESTS.updateTodo(id, formData);
 
     const { success, data } = resData;
@@ -109,12 +114,14 @@ export const updateTodo = (
       // history.push(DASHBOARD);
     }
   } catch (err) {
+    dispatch(setLoading());
     dispatch(setAlert(err.response.data.err, 'error'));
   }
 };
 
 export const deleteTodo = (id: string) => async (dispatch: any) => {
   try {
+    dispatch(setLoading());
     const resData = await REQUESTS.deleteTodo(id);
 
     const { success, data } = resData;
@@ -124,6 +131,7 @@ export const deleteTodo = (id: string) => async (dispatch: any) => {
       // history.push(DASHBOARD);
     }
   } catch (err) {
+    dispatch(setLoading());
     dispatch(setAlert(err.response.data.err, 'error'));
   }
 };
