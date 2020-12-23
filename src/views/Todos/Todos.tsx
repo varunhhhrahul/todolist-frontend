@@ -17,12 +17,18 @@ import {
 } from '@material-ui/core';
 import { FormContainer } from '../../components/FormContainer';
 import Loader from '../../components/Loader/Loader';
-import { getAllTodos, updateTodo, deleteTodo } from '../../slices/todoSlice';
+import {
+  getAllTodos,
+  updateTodo,
+  deleteTodo,
+  getTodo,
+} from '../../slices/todoSlice';
 import EnhancedBasicCreateTodoForm from './BasicCreateTodo/EnhancedBasicCreateTodoForm';
 import ClearIcon from '@material-ui/icons/Clear';
 import { useHistory } from 'react-router-dom';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
+import { DASHBOARD } from '../../constants/routes';
 interface TodosProps {}
 
 export const Todos: React.FC<TodosProps> = ({}) => {
@@ -57,10 +63,15 @@ export const Todos: React.FC<TodosProps> = ({}) => {
                   padding: '0.5rem',
                   backgroundColor: todo.isCompleted ? '#C8E7F7' : 'white',
                   marginBottom: '0.5rem',
+                  cursor: 'pointer',
                 }}
               >
                 <ListItem style={{ width: '100%' }}>
                   <ListItemText
+                    onClick={() => {
+                      dispatch(getTodo(todo._id));
+                      history.push(`${DASHBOARD}/${todo._id}/update`);
+                    }}
                     primary={
                       <span
                         style={{
