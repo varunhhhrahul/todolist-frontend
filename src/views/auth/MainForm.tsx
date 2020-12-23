@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -8,6 +8,9 @@ import Box from '@material-ui/core/Box';
 import { Register } from './Register/Register';
 import { Login } from './Login/Login';
 import { FormContainer } from '../../components/FormContainer';
+import { shallowEqual, useSelector, RootStateOrAny } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { DASHBOARD } from '../../constants/routes';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -65,6 +68,19 @@ const MainForm = () => {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+  const {
+    auth: { isAuthenticated },
+  } = useSelector((state: RootStateOrAny) => {
+    return {
+      auth: state.auth,
+    };
+  }, shallowEqual);
+  const history = useHistory();
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push(DASHBOARD);
+    }
+  }, [isAuthenticated]);
 
   return (
     <FormContainer color='#24323B'>
