@@ -21,6 +21,8 @@ import { getAllTodos, updateTodo, deleteTodo } from '../../slices/todoSlice';
 import EnhancedBasicCreateTodoForm from './BasicCreateTodo/EnhancedBasicCreateTodoForm';
 import ClearIcon from '@material-ui/icons/Clear';
 import { useHistory } from 'react-router-dom';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
 interface TodosProps {}
 
 export const Todos: React.FC<TodosProps> = ({}) => {
@@ -65,6 +67,7 @@ export const Todos: React.FC<TodosProps> = ({}) => {
                           textDecoration: todo.isCompleted
                             ? 'line-through'
                             : '',
+                          fontSize: '0.8rem',
                         }}
                       >
                         {todo.task}
@@ -79,6 +82,26 @@ export const Todos: React.FC<TodosProps> = ({}) => {
                       alignItems: 'flex-end',
                     }}
                   >
+                    <IconButton
+                      onClick={() =>
+                        dispatch(
+                          updateTodo(
+                            todo._id,
+                            {
+                              ...todo,
+                              isImportant: !todo.isImportant,
+                            },
+                            history
+                          )
+                        )
+                      }
+                    >
+                      {!todo.isImportant ? (
+                        <StarBorderIcon style={{ color: 'yellow' }} />
+                      ) : (
+                        <StarIcon style={{ color: 'yellow' }} />
+                      )}
+                    </IconButton>
                     <Button
                       variant='contained'
                       onClick={() =>
