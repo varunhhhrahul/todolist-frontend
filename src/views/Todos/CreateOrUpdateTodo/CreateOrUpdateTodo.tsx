@@ -11,16 +11,19 @@ import Loader from '../../../components/Loader/Loader';
 import { getTodo } from '../../../slices/todoSlice';
 import { Button } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import EnhancedCreateOrUpdateTodoForm from './EnhancedCreateOrUpdateTodoForm';
 
 interface CreateOrUpdateTodoProps {}
 
 export const CreateOrUpdateTodo: React.FC<CreateOrUpdateTodoProps> = ({}) => {
   const dispatch = useDispatch();
   const params = useParams<{ id: string }>();
+  const { id } = params;
   const history = useHistory();
   useEffect(() => {
-    dispatch(getTodo(params.id));
+    dispatch(getTodo(id));
   }, []);
+
   const {
     todo: { todo, loading },
   } = useSelector((state: RootStateOrAny) => {
@@ -28,6 +31,9 @@ export const CreateOrUpdateTodo: React.FC<CreateOrUpdateTodoProps> = ({}) => {
       todo: state.todo,
     };
   }, shallowEqual);
+  useEffect(() => {
+    dispatch(getTodo(id));
+  }, [id, dispatch, todo]);
   if (todo === null || loading) return <Loader />;
   return (
     <>
@@ -40,6 +46,7 @@ export const CreateOrUpdateTodo: React.FC<CreateOrUpdateTodoProps> = ({}) => {
           {' '}
           Back to tasks
         </Button>
+        <EnhancedCreateOrUpdateTodoForm history={history} todo={todo} />
       </FormContainer>
     </>
   );
