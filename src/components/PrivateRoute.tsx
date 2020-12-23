@@ -1,11 +1,13 @@
 import React, { ReactChild } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, RouteProps } from 'react-router-dom';
 import { useSelector, shallowEqual, RootStateOrAny } from 'react-redux';
 import { HOME } from '../constants/routes';
 import Loader from './Loader/Loader';
 
 interface PrivateRouteProps {
   children: ReactChild;
+  exact?: boolean;
+  path?: string;
 }
 
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({
@@ -27,7 +29,7 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = ({
         !isAuthenticated && !loading ? (
           <Redirect to={HOME} />
         ) : (
-          <>{user === null ? <Loader /> : { children }}</>
+          <>{user === null ? <Loader /> : children}</>
         )
       }
     />
