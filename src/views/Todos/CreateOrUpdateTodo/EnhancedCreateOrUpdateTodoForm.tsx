@@ -9,22 +9,40 @@ import {
   PASSWORD_REQUIRED,
   PASSWORD_SHORT_ERROR,
 } from '../../../constants/messages/formMessages';
+import { AppThunk } from '../../../store';
+interface IDispatchProps {
+  createTodo: (formData: any) => AppThunk;
+  updateTodo: (id: string, formData: any, history: any) => AppThunk;
+}
+
+export interface EnhancedCreateOrUpdateTodoFormValues {
+  task: string | undefined;
+  description: string | undefined;
+  isEvent: boolean | undefined;
+  isCompleted: boolean | undefined;
+  isImportant: boolean | undefined;
+  dateOfCompletion: Date | null | undefined;
+  dateOfEvent: Date | null | undefined;
+}
 
 interface EnhancedCreateOrUpdateTodoFormProps {
   todo?: {
-    task?: string;
-    description?: string;
-    isEvent?: boolean;
-    isCompleted?: boolean;
-    isImportant?: boolean;
-    dateOfCompletion?: Date;
-    dateOfEvent?: Date;
+    task?: string | undefined;
+    description?: string | undefined;
+    isEvent?: boolean | undefined;
+    isCompleted?: boolean | undefined;
+    isImportant?: boolean | undefined;
+    dateOfCompletion?: Date | null | undefined;
+    dateOfEvent?: Date | null | undefined;
   };
+  createTodo?: (formData: any) => void;
+  updateTodo?: (id: string, formData: any, history: any) => void;
+  history?: any;
 }
 
 const EnhancedCreateOrUpdateTodoForm = withFormik<
   EnhancedCreateOrUpdateTodoFormProps,
-  FormikValues
+  EnhancedCreateOrUpdateTodoFormValues
 >({
   mapPropsToValues: (props) => ({
     task: props.todo ? props.todo.task : '',
@@ -48,7 +66,7 @@ const EnhancedCreateOrUpdateTodoForm = withFormik<
     dateOfCompletion: Yup.date().notRequired(),
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
-    // const { todo, createTodo, updateTodo } = props;
+    const { todo, createTodo, updateTodo } = props;
 
     // if (todo) {
     //   updateTodo(values);
@@ -64,10 +82,7 @@ const EnhancedCreateOrUpdateTodoForm = withFormik<
   displayName: 'CreateOrUpdateTodoForm',
 })(CreateOrUpdateTodoForm);
 
-const mapStateToProps = (state: RootStateOrAny) => ({
-  todo: state.todo,
-});
-
-export default connect(mapStateToProps, { createTodo, updateTodo })(
-  EnhancedCreateOrUpdateTodoForm
-);
+export default connect<null, IDispatchProps>(null, {
+  createTodo,
+  updateTodo,
+})(EnhancedCreateOrUpdateTodoForm);
