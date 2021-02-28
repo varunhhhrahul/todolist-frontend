@@ -72,7 +72,8 @@ export const Todos: React.FC<TodosProps> = ({}) => {
                       dispatch(getTodo(todo._id));
                       history.push(`${DASHBOARD}/${todo._id}/update`);
                     }}
-                    primary={
+                    primary={() => (
+                      // @ts-ignore
                       <span
                         style={{
                           textDecoration: todo.isCompleted
@@ -82,8 +83,9 @@ export const Todos: React.FC<TodosProps> = ({}) => {
                         }}
                       >
                         {todo.task}
+                        {/* @ts-ignore */}
                       </span>
-                    }
+                    )}
 
                     // secondary={todo.description.slice(0, 100) + '...'}
                   />
@@ -130,7 +132,6 @@ export const Todos: React.FC<TodosProps> = ({}) => {
                       }
                       disabled={todo.isCompleted}
                     >
-                      {' '}
                       Complete
                     </Button>
                     <IconButton onClick={() => dispatch(deleteTodo(todo._id))}>
