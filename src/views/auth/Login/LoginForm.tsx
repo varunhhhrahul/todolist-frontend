@@ -13,6 +13,7 @@ import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
 } from '@material-ui/icons';
+import { CheckFormikValues } from '../../../components/Formik/CheckFormikValues';
 
 const styles = (theme: any) => ({
   multilineColor: {
@@ -129,6 +130,8 @@ export const LoginForm: React.FC<
         >
           {loading ? 'Loading...' : 'Login'}
         </Button>
+
+        {debug ? <CheckFormikValues {...props} /> : ''}
       </form>
     </>
   );
