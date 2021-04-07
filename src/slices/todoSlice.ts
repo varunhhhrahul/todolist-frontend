@@ -64,7 +64,7 @@ export const getAllTodos = () => async (dispatch: any) => {
     }
   } catch (err) {
     dispatch(setLoading());
-    dispatch(setAlert(err.response.data.err, 'error'));
+    dispatch(setAlert(err.response.data.error, 'error'));
   }
 };
 
@@ -79,7 +79,7 @@ export const getTodo = (id: string) => async (dispatch: any) => {
     }
   } catch (err) {
     dispatch(setLoading());
-    dispatch(setAlert(err.response.data.err, 'error'));
+    dispatch(setAlert(err.response.data.error, 'error'));
   }
 };
 
@@ -96,7 +96,7 @@ export const createTodo = (formData: any) => async (dispatch: any) => {
     }
   } catch (err) {
     dispatch(setLoading());
-    dispatch(setAlert(err.response.data.err, 'error'));
+    dispatch(setAlert(err.response.data.error, 'error'));
   }
 };
 
@@ -115,7 +115,7 @@ export const updateTodo = (id: string, formData: any, history: any) => async (
     }
   } catch (err) {
     dispatch(setLoading());
-    dispatch(setAlert(err.response.data.err, 'error'));
+    dispatch(setAlert(err.response.data.error, 'error'));
   }
 };
 
@@ -132,6 +132,6 @@ export const deleteTodo = (id: string) => async (dispatch: any) => {
     }
   } catch (err) {
     dispatch(setLoading());
-    dispatch(setAlert(err.response.data.err, 'error'));
+    dispatch(setAlert(err.response.data.error, 'error'));
   }
 };
